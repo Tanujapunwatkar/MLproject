@@ -3,4 +3,7 @@ seaborn
 matplotlib
 numpy
 Flask
--e .
+scikit-learn
+catboost
+xgboost
+#-e .
