@@ -41,10 +41,10 @@ class DataTransformation:
 
             cat_pipeline = Pipeline(
 
-                seteps = [
+                steps = [
                     ("imputer", SimpleImputer(strategy="most_frequent")),
                     ("One_hot_encoder", OneHotEncoder()),
-                    ("scaler", StandardScaler())
+                    ("scaler", StandardScaler(with_mean=False))
                 ]
             )
 
@@ -90,7 +90,7 @@ class DataTransformation:
             )
 
             input_features_train_arr = preprocessing_obj.fit_transform(input_features_train_df)
-            input_features_test_arr = preprocessing_obj.transform(input_features_train_df)
+            input_features_test_arr = preprocessing_obj.transform(input_features_test_df)
 
             train_arr = np.c_[
                 input_features_train_arr, np.array(target_features_train_df)
@@ -110,5 +110,5 @@ class DataTransformation:
                 test_arr,
                 self.data_transformation_config.preprocessor_obj_file_path,
             )
-        except:
-            pass
+        except Exception as e:
+            raise CustomException(e,sys)
