@@ -15,7 +15,7 @@ import os
 from src.utils import save_object
 
 class DataTransformationConfig:
-    preprocessor_obj_file_path = os.path.join('artifacts', "proprocessor.pkl")
+    preprocessor_obj_file_path = os.path.join('artifacts', "preprocessor.pkl")
 
 class DataTransformation:
     def __init__(self):
@@ -43,7 +43,7 @@ class DataTransformation:
 
                 steps = [
                     ("imputer", SimpleImputer(strategy="most_frequent")),
-                    ("One_hot_encoder", OneHotEncoder()),
+                    ("One_hot_encoder", OneHotEncoder(handle_unknown='ignore')),
                     ("scaler", StandardScaler(with_mean=False))
                 ]
             )

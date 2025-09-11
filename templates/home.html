@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+   
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px; 
+    }
+
+
+    .login {
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 20px 30px; 
+        border-radius: 25px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 400px;
+        animation: fadeIn 1s ease-in-out;
+        margin: 40px 0; 
+        display: flex;
+        flex-direction: column;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 26px;
+        letter-spacing: 1px;
+    }
+
+    form h1 legend {
+        font-size: 20px;
+        margin-bottom: 15px;
+        color: #555;
+        text-align: center;
+    }
+
+    label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    select, input[type="number"] {
+        width: 100%;
+        padding: 10px 12px;
+        margin-bottom: 15px;
+        border-radius: 12px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+        transition: 0.3s;
+    }
+
+    select:focus, input[type="number"]:focus {
+        border-color: #66a6ff;
+        box-shadow: 0 0 8px rgba(102, 166, 255, 0.5);
+        outline: none;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 14px;
+        font-size: 17px;
+        font-weight: 600;
+        color: #fff;
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: 0.4s;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Prediction result */
+    h2 {
+        text-align: center;
+        margin-top: 25px;
+        font-size: 20px;
+        color: #2575fc;
+        letter-spacing: 0.5px;
+        animation: fadeIn 1.2s ease-in-out;
+    }
+
+    /* Back button */
+    .back-btn {
+        display: block;
+        margin: 15px auto 0;
+        padding: 10px 20px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #fff;
+        background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.4s;
+    }
+
+    .back-btn:hover {
+        background: linear-gradient(135deg, #ff4b2b 0%, #ff416c 100%);
+        transform: translateY(-2px);
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    </style>
+</head>
+<body>
+    <div class="login">
+       <form action="{{ url_for('predict_datapoint')}}" method="post">
+            <h1><legend>Student Exam Performance Prediction</legend></h1>
+            <div class="mb-3">
+                <label class="form-label">Gender</label>
+                <select class="form-control" name="gender" required>
+                    <option selected disabled value="">Select your Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Race or Ethnicity</label>
+                <select class="form-control" name="ethnicity" required>
+                    <option selected disabled value="">Select Ethnicity</option>
+                    <option value="group A">Group A</option>
+                    <option value="group B">Group B</option>
+                    <option value="group C">Group C</option>
+                    <option value="group D">Group D</option>
+                    <option value="group E">Group E</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Parental Level of Education</label>
+                <select class="form-control" name="parental_level_of_education" required>
+                    <option selected disabled value="">Select Parent Education</option>
+                    <option value="associate's degree">associate's degree</option>
+                    <option value="bachelor's degree">bachelor's degree</option>
+                    <option value="high school">high school</option>
+                    <option value="master's degree">master's degree</option>
+                    <option value="some college">some college</option>
+                    <option value="some high school">some high school</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Lunch Type</label>
+                <select class="form-control" name="lunch" required>
+                    <option selected disabled value="">Select Lunch Type</option>
+                    <option value="free/reduced">free/reduced</option>
+                    <option value="standard">standard</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Test preparation Course</label>
+                <select class="form-control" name="test_preparation_course" required>
+                    <option selected disabled value="">Select Test_course</option>
+                    <option value="none">None</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Writing Score out of 100</label>
+                <input class="form-control" type="number" name="reading_score" min='0' max='100' />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Reading Score out of 100</label>
+                <input class="form-control" type="number" name="writing_score" min='0' max='100' />
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-primary" type="submit" value="Predict your Maths Score" />
+            </div>
+        </form>
+        <h2>THE prediction is {{results}}</h2>
+        <a href="{{ url_for('index') }}" class="back-btn">Back to Homepage</a>
+    </div>
+</body>
+</html>

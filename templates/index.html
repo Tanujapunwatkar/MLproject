@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Exam Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+        .start-btn {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background-color:#66a6ff;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .start-btn:hover {
+            background-color: #75eef7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Student Exam Performance Prediction</h1>
+        <p>Predict student math exam outcomes.</p>
+        <a href="{{ url_for('predict_datapoint') }}" class="start-btn">Start Prediction</a>
+    </div>
+</body>
+</html>
