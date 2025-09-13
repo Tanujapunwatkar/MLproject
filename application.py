@@ -3,16 +3,13 @@ import numpy as np
 import pandas as pd
 from src.pipeline.predict_pipeline import CustomData, PredictPipeline
 
-# Flask app
 application = Flask(__name__)
-app = application  # Elastic Beanstalk uses 'application'
+app = application  
 
-# Home page
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# Prediction route
 @app.route('/predictdata', methods=['GET', 'POST'])
 def predict_datapoint():
     if request.method == 'GET':
@@ -37,6 +34,5 @@ def predict_datapoint():
         except Exception as e:
             return render_template('home.html', results=f"Error: {str(e)}")
 
-# Run app locally (Elastic Beanstalk uses gunicorn)
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    app.run(host="0.0.0.0")
